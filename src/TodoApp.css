@@ -1,0 +1,161 @@
+/* Base styles */
+.TodoBackground {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.TodoApp {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: calc(24px + env(safe-area-inset-top)) calc(24px + env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) calc(24px + env(safe-area-inset-left));
+}
+
+/* Header styles */
+.TodoHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.TodoLogo {
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+}
+
+.TodoTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input container styles */
+.TodoInputContainer {
+  display: flex;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.TodoInput {
+  flex: 1;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 16px;
+  border: none;
+  background-color: white;
+}
+
+.TodoAddButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 48px;
+  background-color: #4a6ee0;
+  color: white;
+  font-weight: bold;
+}
+
+/* Todo list styles */
+.TodoList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0 16px;
+}
+
+.TodoEmptyMessage {
+  margin: 24px;
+  text-align: center;
+  color: #999;
+  font-size: 16px;
+}
+
+.TodoItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.TodoCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  margin-right: 16px;
+}
+
+.TodoCheckbox--checked {
+  background-color: #4a6ee0;
+  border-color: #4a6ee0;
+}
+
+.TodoCheckmark {
+  color: white;
+  font-size: 14px;
+}
+
+.TodoText {
+  flex: 1;
+  font-size: 16px;
+  color: #333;
+}
+
+.TodoText--completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.TodoDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #999;
+  font-size: 20px;
+  margin-left: 16px;
+}
+
+/* Footer styles */
+.TodoFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.TodoCount {
+  font-size: 14px;
+  color: #666;
+}
+
+.TodoClearButton {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #4a6ee0;
+  border-radius: 4px;
+}
+
+.TodoClearButton:hover {
+  background-color: rgba(74, 110, 224, 0.1);
+} 
