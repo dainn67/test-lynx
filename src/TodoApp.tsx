@@ -20,7 +20,7 @@ export function TodoApp() {
             <image src={lynxLogo} className="TodoLogo" />
             <text className="TodoTitle">Todo List</text>
           </view>
-          {/* <TodoInput /> */}
+          <TodoInput />
           <TodoList />
           <TodoFooter />
         </view>
