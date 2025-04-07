@@ -1,9 +1,10 @@
-import { root } from '@lynx-js/react'
+import { root } from '@lynx-js/react';
 
-import { TodoApp } from './TodoApp.js'
+import { ChatbotApp } from './screens/chatbot/ChatbotApp.jsx';
 
-root.render(<TodoApp />)
+// root.render(<TodoApp />)
+root.render(<ChatbotApp />);
 
 if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
+  import.meta.webpackHot.accept();
 }
