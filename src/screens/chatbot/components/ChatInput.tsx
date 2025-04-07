@@ -31,7 +31,7 @@ export const ChatInput = () => {
         padding: '12px 16px',
         marginBottom: '16px',
         borderRadius: '12px',
-        margin: '16px',
+        margin: '16px 16px 30px 16px',
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         alignItems: 'center',
         position: 'sticky',
@@ -39,15 +39,16 @@ export const ChatInput = () => {
       }}
     >
       <input
-        placeholder="Type a message..."
         value={inputText}
         bindinput={handleInputChange}
+        placeholder="Type a message..."
         style={{
           flex: 1,
-          border: 'none',
-          padding: '12px 0',
+          height: '100%',
           fontSize: '16px',
           outline: 'none',
+          border: 'none',
+          padding: '12px 0',
         }}
       />
       <view
