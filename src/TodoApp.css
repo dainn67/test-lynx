@@ -65,6 +65,74 @@
   background-color: #4a6ee0;
   color: white;
   font-weight: bold;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.TodoAddButton:hover {
+  background-color: #3a5bc7;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.TodoAddButton:active {
+  background-color: #2a4bb7;
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(74, 110, 224, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(74, 110, 224, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(74, 110, 224, 0);
+  }
+}
+
+.TodoAddButton-pulse {
+  animation: pulse 0.4s ease-in-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.TodoAddButton-ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+/* Add button text animation */
+.TodoAddButton text {
+  transition: transform 0.2s ease;
+}
+
+.TodoAddButton:hover text {
+  transform: scale(1.1);
+}
+
+.TodoAddButton:active text {
+  transform: scale(0.95);
 }
 
 /* Todo list styles */
@@ -81,6 +149,29 @@
   min-height: 0; /* Important for proper flex scrolling */
 }
 
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
 .TodoEmptyMessage {
   margin: 24px;
   text-align: center;
@@ -93,6 +184,12 @@
   align-items: center;
   padding: 16px 0;
   border-bottom: 1px solid #eee;
+  animation: fadeIn 0.3s ease-out;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.TodoItem-exit {
+  animation: fadeOut 0.3s ease-out;
 }
 
 .TodoCheckbox {

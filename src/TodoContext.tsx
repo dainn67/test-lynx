@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useState } from '@lynx-js/react';
+import { createContext, useCallback, useContext, useState, useRef, useEffect } from '@lynx-js/react';
 
 export interface TodoItem {
   id: string;
@@ -15,12 +15,22 @@ interface TodoContextType {
   clearCompleted: () => void;
   activeTodoCount: number;
   completedTodoCount: number;
+  animatingIds: string[];
 }
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 export function TodoProvider({ children }: { children: React.ReactNode }) {
   const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [animatingIds, setAnimatingIds] = useState<string[]>([]);
+  const timeoutRefs = useRef<Record<string, NodeJS.Timeout>>({});
+
+  // Clean up timeouts on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(timeoutRefs.current).forEach(clearTimeout);
+    };
+  }, []);
 
   const addTodo = useCallback((text: string) => {
     if (text.trim()) {
@@ -43,12 +53,33 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const deleteTodo = useCallback((id: string) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    // Add to animating ids
+    setAnimatingIds((prev) => [...prev, id]);
+    
+    // Set a timeout to remove the todo after animation completes
+    const timeoutId = setTimeout(() => {
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+      setAnimatingIds((prev) => prev.filter((itemId) => itemId !== id));
+    }, 300); // Match animation duration in CSS
+    
+    timeoutRefs.current[id] = timeoutId;
   }, []);
 
   const clearCompleted = useCallback(() => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
-  }, []);
+    // Get all completed todos for animation
+    const completedIds = todos
+      .filter((todo) => todo.completed)
+      .map((todo) => todo.id);
+    
+    // Add all to animating state
+    setAnimatingIds((prev) => [...prev, ...completedIds]);
+    
+    // Set a single timeout to remove all completed after animation
+    setTimeout(() => {
+      setTodos((prevTodos) => prevTodos.filter((todo) => !todo.completed));
+      setAnimatingIds([]);
+    }, 300);
+  }, [todos]);
 
   const activeTodoCount = todos.filter((todo) => !todo.completed).length;
   const completedTodoCount = todos.length - activeTodoCount;
@@ -61,6 +92,7 @@ export function TodoProvider({ children }: { children: React.ReactNode }) {
     clearCompleted,
     activeTodoCount,
     completedTodoCount,
+    animatingIds,
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
