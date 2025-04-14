@@ -9,8 +9,13 @@ export const ChatMessageBox = () => {
   // Scroll to bottom when new messages arrive
   useEffect(() => {
     if (messagesEndRef.current) {
+      console.log('scroll');
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
+
+    lynx.getJSModule('GlobalEventEmitter').addListener('myHappyEvent', () => {
+      console.log('myHappyEvent triggered!');
+    });
   }, [messages]);
 
   return (
@@ -61,17 +66,6 @@ export const ChatMessageBox = () => {
           return <ChatMessage key={id} id={id} type={type} text={text} />;
         })}
       </scroll-view>
-
-      {/* <view
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px',
-          overflow: 'auto',
-        }}
-      >
-        
-      </view> */}
     </view>
   );
 };

@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@lynx-js/react": "^0.106.3",
-    "@mui/material": "^7.0.1"
+    "@mui/material": "^7.0.1",
+    "@tanstack/react-query": "^5.73.3",
+    "react-router": "6"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

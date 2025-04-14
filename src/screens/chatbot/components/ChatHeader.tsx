@@ -1,4 +1,6 @@
-export const ChatHeader = () => {
+import BackButton from '../../../components/BackButtons';
+
+export const ChatHeader = ({ title }: { title: string | undefined }) => {
   return (
     <view
       style={{
@@ -13,6 +15,7 @@ export const ChatHeader = () => {
         zIndex: 1000,
       }}
     >
+      <BackButton />
       <text
         style={{
           fontSize: '20px',
@@ -21,7 +24,7 @@ export const ChatHeader = () => {
           color: 'white',
         }}
       >
-        Chatbot
+        {title ? title : 'Chatbot'}
       </text>
       <view
         style={{
@@ -32,7 +35,6 @@ export const ChatHeader = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          cursor: 'pointer',
         }}
       >
         <text

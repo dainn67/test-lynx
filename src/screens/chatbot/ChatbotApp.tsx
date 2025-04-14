@@ -2,11 +2,15 @@ import { ChatbotProvider } from './ChatbotContext';
 import { ChatInput } from './components/ChatInput';
 import { ChatMessageBox } from './components/ChatMessageBox';
 import { ChatHeader } from './components/ChatHeader';
+import { useParams } from 'react-router';
 
 export const ChatbotApp = () => {
+  const { id } = useParams();
+
   return (
     <ChatbotProvider>
       <view
+        className="container"
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -15,7 +19,7 @@ export const ChatbotApp = () => {
           fontFamily: 'Roboto, Arial, sans-serif',
         }}
       >
-        <ChatHeader />
+        <ChatHeader title={id} />
         <ChatMessageBox />
         <ChatInput />
       </view>
